@@ -5,26 +5,11 @@ import { withStyles } from '@material-ui/core/styles'
 import { List, ListItem, ListItemText, Collapse, ListItemIcon } from '@material-ui/core'
 import { ExpandLess, RemoveCircle, ExpandMore, ViewList, AddCircle, AccountCircle, AddShoppingCart, Settings, Timeline, TrendingDown, TrendingUp } from '@material-ui/icons'
 
-class MainMenu extends React.Component {
-  state = {
-    open: false,
-    modalOpen: false
-  }
-  handleClick = () => {
-    this.setState(state => ({
-      open: !state.open,
-    }))
-  }
-  handleModalOpen = () => {
-    this.setState(state => ({
-      modalOpen: !state.modalOpen
-    }))
-  }
-  render() {
-    const { classes } = this.props
+
+  const MainMenu = ({loadProducts, classes, openReportsNav, openSettingsNav, handleSettingsMenu, handleReportsMenu }) => {
     return <div>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() =>loadProducts()}>
           <ListItemIcon>
             <ViewList />
           </ListItemIcon>
@@ -42,14 +27,14 @@ class MainMenu extends React.Component {
           </ListItemIcon>
           <ListItemText primary="Sell" />
         </ListItem>
-        <ListItem button onClick={this.handleClick}>
+        <ListItem button onClick = {() => handleReportsMenu()}>
           <ListItemIcon>
             <Timeline />
           </ListItemIcon>
           <ListItemText primary="Reports" />
-          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+          {openReportsNav? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+        <Collapse  in={openReportsNav} timeout="auto" unmountOnExit>
           <List className={classes.nested}>
             <ListItem button>
               <ListItemIcon >
@@ -65,15 +50,15 @@ class MainMenu extends React.Component {
             </ListItem>
           </List>
         </Collapse>
-        <ListItem button onClick={this.handleModalOpen}>
+        <ListItem button onClick = {() => handleSettingsMenu()}>
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
           <ListItemText inset primary="Settings" />
-          {this.state.modalOpen ? <ExpandLess /> : <ExpandMore />}
+          {openSettingsNav ? <ExpandLess /> : <ExpandMore />}
 
         </ListItem>
-        <Collapse in={this.state.modalOpen} timeout="auto" unmountOnExit>
+        <Collapse in={openSettingsNav} timeout="auto" unmountOnExit>
           <List className={classes.nested}>
             <ListItem button>
               <ListItemIcon >
@@ -93,7 +78,7 @@ class MainMenu extends React.Component {
     </div>
   }
 
-}
+// }
 MainMenu.propTypes = {
   classes: PropTypes.object.isRequired
 }
