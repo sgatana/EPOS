@@ -51,9 +51,9 @@ p{
   padding: 10px 15px;
 }
 .sidebar-wrapper li:hover{
-  color: #fff;
+  color: #30a5ff;
   cursor: pointer;
-  background-color: #30a5ff;
+  /* background-color: #f9f9f9; */
 
 }
 .sidebar-wrapper a{
@@ -63,6 +63,19 @@ p{
 }
 .sidebar-wrapper a:hover{
   color: #fff;
+}
+.sidebar-wrapper li ul {
+  display: none;
+}
+
+.sidebar-wrapper li:hover ul{
+  display: block;
+  list-style: none;
+  transition: all 0.7s ease;
+}
+.sidebar-wrapper li:hover .arrows{
+  transform: rotate(90deg);
+  transition: transform 0.5 ease-out;
 }
 .header{
   height: 50px;
@@ -77,6 +90,10 @@ p{
 .header-menu:active{
   color: #fff;
   background-color: #30a5ff;
+}
+.arrows{
+  right: 10px;
+  position: absolute;
 }
 @media  (max-width: 600px){
   .sidebar-wrapper{
